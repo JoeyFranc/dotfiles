@@ -113,4 +113,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Aliasi
 alias chrome=google-chrome
+alias caen="ssh jfranc@login.engin.umich.edu"
+alias eclipse="~/eclipse/cpp-mars/eclipse/eclipse"
+alias open=xdg-open

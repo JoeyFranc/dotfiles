@@ -7,38 +7,6 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'reedes/vim-thematic'
-" Theme management plugin
-Plugin 'Valloric/YouCompleteMe'
-" plugin for IDE-like autocomplete
-Plugin 'Raimondi/delimitMate'
-" Automtic closing of quotes, parenthesis, brackets, etc.
-" Track the engine.
-
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-
-
-"ENABLE 256 colors
-set t_Co=256
-
-set nu
-set ts=4
-set expandtab
-set shiftwidth=4
-set autoindent
-filetype indent off
-
-"
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
@@ -47,3 +15,45 @@ filetype indent off
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+Plugin 'VundleVim/Vundle.vim'
+" let Vundle manage Vundle, required
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'reedes/vim-thematic'
+" Theme management plugin
+Plugin 'Raimondi/delimitMate'
+" Automtic closing of quotes, parenthesis, brackets, etc.
+" Track the engine.
+Plugin 'scrooloose/syntastic'
+" Syntax Error highlighting
+
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+" Syntastic Settings
+let g:syntastic_check_on_open = 1
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_error_symbol = "✗"
+
+"ENABLE 256 colors
+set t_Co=256
+
+" Tab settings
+set nu
+set ts=4
+set expandtab
+set shiftwidth=4
+set autoindent
+filetype indent off
+
+" Remaps for split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
