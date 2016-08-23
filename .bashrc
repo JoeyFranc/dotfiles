@@ -118,3 +118,4 @@ alias chrome=google-chrome
 alias caen="ssh jfranc@login.engin.umich.edu"
 alias eclipse="~/eclipse/cpp-mars/eclipse/eclipse"
 alias open=xdg-open
+alias touchpadOff="synclient TouchpadOff=1"
