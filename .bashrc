@@ -8,6 +8,37 @@ case $- in
       *) return;;
 esac
 
+# Make colors in VIM work
+if [ "$TERM" = "xterm" ] ; then
+    if [ -z "$COLORTERM" ] ; then
+        if [ -z "$XTERM_VERSION" ] ; then
+            echo "Warning: Terminal wrongly calling itself 'xterm'."
+        else
+            case "$XTERM_VERSION" in
+            "XTerm(256)") TERM="xterm-256color" ;;
+            "XTerm(88)") TERM="xterm-88color" ;;
+            "XTerm") ;;
+            *)
+                echo "Warning: Unrecognized XTERM_VERSION: $XTERM_VERSION"
+                ;;
+            esac
+        fi
+    else
+        case "$COLORTERM" in
+            gnome-terminal)
+                # Those crafty Gnome folks require you to check COLORTERM,
+                # but don't allow you to just *favor* the setting over TERM.
+                # Instead you need to compare it and perform some guesses
+                # based upon the value. This is, perhaps, too simplistic.
+                TERM="gnome-256color"
+                ;;
+            *)
+                echo "Warning: Unrecognized COLORTERM: $COLORTERM"
+                ;;
+        esac
+    fi
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -118,4 +149,7 @@ alias chrome=google-chrome
 alias caen="ssh jfranc@login.engin.umich.edu"
 alias eclipse="~/eclipse/cpp-mars/eclipse/eclipse"
 alias open=xdg-open
-alias touchpadOff="synclient TouchpadOff=1"
+alias tpOff="synclient TouchpadOff=1"
+alias tpOn="synclient TouchpadOff=0"
+alias py3=python3
+alias py=python

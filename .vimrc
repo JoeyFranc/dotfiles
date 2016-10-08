@@ -20,8 +20,6 @@ Plugin 'VundleVim/Vundle.vim'
 " let Vundle manage Vundle, required
 Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'reedes/vim-thematic'
-" Theme management plugin
 Plugin 'Raimondi/delimitMate'
 " Automtic closing of quotes, parenthesis, brackets, etc.
 " Track the engine.
@@ -31,13 +29,28 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 " C++ Syntax Enhancement
 Plugin 'vim-airline/vim-airline'
 " Doped-out command bar
-
+Plugin 'Valloric/YouCompleteMe'
+" Tab for autocompletion in Vim
+Plugin 'flazz/vim-colorschemes'
+" Colorscheme Pack
+Plugin 'christoomey/vim-tmux-navigator'
+" Tmux integration
+Plugin 'SirVer/ultisnips'
+" Track the engine.
+Plugin 'honza/vim-snippets'
+" Snippets database
 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required 
 " To ignore plugin indent changes, instead use: "filetype plugin on
+
+" \ 'matrix'      :{'colorscheme': 'base16-greenscreen',
+" \                 'background': 'dark',
+" \                 'typeface': 'Dot Matrix',
+" \                 'linespace': 9,
+" \                },
 
 " DelimitMate Settings
 let delimitMate_expand_space = 1
@@ -51,19 +64,20 @@ let g:syntastic_error_symbol = '❌'
 
 " Enhance C++ syntax highlighting
 let g:cpp_class_scope_highlight = 1
-" Add highlighting for function definition in C++
-" function! EnhanceCppSyntax()
-"     syn match cppFuncDef "::\~\?\zs\h\w*\ze([^)]*\()\s*\(const\)\?\)\?$"
-"     hi def link cppFuncDef Special
-" endfunction
-"
-" autocmd Syntax cpp call EnhanceCppSyntax()
+
+" YouCompleteMe Settings
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " ENABLE 256 colors
 set t_Co=256
 
 " Enable Airline by default
 set laststatus=2
+
+" Ultisnips Settings
+let g:UltiSnipsExpandTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-x>"
 
 " Tab settings
 set nu
