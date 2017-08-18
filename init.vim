@@ -1,5 +1,3 @@
-"""NeoBundle
-
 " Note: Skip initialization for vim-tiny or vim-small.
 if 0 | endif
 if &compatible
@@ -7,23 +5,36 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.vim/bundle/'))
+set runtimepath+=/home/joey/.vim/bundles/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+if dein#load_state('/home/joey/.vim/bundles')
+    call dein#begin('/home/joey/.vim/bundles')
 
-""" My Bundles here:
-NeoBundle 'w0rp/ale'                        "ALE - Asynchronous Lint Engine
-NeoBundle 'Raimondi/delimitMate'            "Auto closing of quotes, parenthesis, brackets, etc.
-NeoBundle 'Shougo/deoplete.nvim'            "Autocomplete for many languages           
-NeoBundle 'zchee/deoplete-clang'            "Extends autocomplete to c-style languages
-NeoBundle 'zchee/deoplete-jedi'             "Extends autocomplete to Python
+    " Required: Let dein manage dein
+    call dein#add('/home/joey/.vim/bundles/repos/github.com/Shougo/dein.vim')
 
-call neobundle#end()
+    """ My Bundles here:
+    call dein#add('vim-airline/vim-airline')  "The lighter than air status bar
+    call dein#add('vim-scripts/a')            "Quickly switch between source and headers
+    call dein#add('w0rp/ale')                 "ALE - Asynchronous Lint Engine
+    call dein#add('Rip-Rip/clang_complete')   "Autocomplete for C/C++
+    call dein#add('Raimondi/delimitMate')     "Auto closing of quotes, parenthesis, etc.
+    call dein#add('airblade/vim-gitgutter')   "Shows gutter git diff since last commit
+    call dein#add('scrooloose/nerdtree')      "Project tree
+    call dein#add('scrooloose/nerdcommenter') "Smart commenting
+    call dein#add('matjutsushi/tagbar')       "Class outline viewer
+    call dein#add('SirVer/ultisnips')         "Code snippet creator
 
-""" Bundle Settings
+    call dein#end()
+    call dein#save_state()
+endif
+
+filetype plugin indent on
+syntax enable
+
+" Airline
+set laststatus=2    "Enable Airline by default
 
 " ALE
 :set statusline=%{ALEGetStatusLine()}
@@ -31,41 +42,39 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '⚠'
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_c_gcc_options = '-std=c17 -Wall'
+let g:ale_linters = {
+\   'python': ['mypy'],
+\}
 nmap <silent> <C-Left> <Plug>(ale_previous_wrap)
 nmap <silent> <C-Right> <Plug>(ale_next_wrap)
+
+"Clang Complete
+" path to directory where library can be found
+let g:clang_library_path='/usr/lib/llvm-3.8/lib'
+" or path directly to the library file
+let g:clang_library_path='/usr/lib64/libclang.so.3.8'
 
 " DelimitMate
 let delimitMate_expand_space = 1
 let delimitMate_expand_cr = 2
 let delimitMate_jump_expansion = 1
 
-" Deoplete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr><S-tab> pumvisible() ? "\<c-p>" : "\<tab>"
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = "/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header = "~/llvm/tools/clang/lib/Headers/"
-
 " Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-
-
 
 " Tab settings
 set expandtab
 set shiftwidth=4
 set ts=4
 set ai
+filetype indent off
 
 " Remaps for split navigation
-nnoremap <S-j> <C-W>+
-nnoremap <S-k> <C-W>_
-nnoremap <S-h> <C-W><
-nnoremap <S-l> <C-W>>
+nnoremap <A-j> :resize +1 <CR>
+nnoremap <A-k> :resize -1 <CR>
+nnoremap <A-h> :vertical resize +1 <CR>
+nnoremap <A-l> :vertical resize -1 <CR>
 nnoremap <C-j> <C-W><C-J>
 nnoremap <C-k> <C-W><C-K>
 nnoremap <C-l> <C-W><C-L>
@@ -80,7 +89,6 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 
 " Remaps for quicker access
 nnoremap ; :
-nnoremap Q @q
 
 " Other features
 set inccommand=split
